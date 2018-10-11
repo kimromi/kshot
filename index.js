@@ -8,11 +8,16 @@ router.get('/', (ctx, next) => {
   ctx.body = 'Hello KShot!'
 })
 router.get('/shot', (ctx, next) => {
-  ctx.body = 'Hello Shot!'
+  const url = ctx.request.query.url
+  if (typeof url === 'undefined') {
+    ctx.body = 'please set parameter `url`.'
+    return
+  }
+  ctx.body = ctx.request.query.url
 })
 
 app
   .use(router.routes())
-  .use(router.allowedMethods());
+  .use(router.allowedMethods())
 
 app.listen(process.env.PORT || 80)
