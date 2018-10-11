@@ -28,6 +28,7 @@ router.get('/shot', async (ctx, next) => {
   const page = await browser.newPage()
   try {
     await page.goto(url, { waitUntil: 'load' })
+    await page.waitFor(3000)
     await page.screenshot({ path: file, fullPage: true })
     await send(ctx, file, { root: '/' })
     fs.unlinkSync(file)
