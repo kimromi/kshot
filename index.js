@@ -1,5 +1,7 @@
+const fs = require('fs')
 const Koa = require('koa')
 const Router = require('koa-router')
+const send = require('koa-send')
 const puppeteer = require('puppeteer')
 
 const app = new Koa()
@@ -15,12 +17,14 @@ router.get('/shot', async (ctx, next) => {
     return
   }
 
+  const file = '/tmp/shot.png'
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
   try {
     await page.goto(url, { waitUntil: 'load' })
-    await page.screenshot({ path: '/tmp/shot.png', fullPage: true })
-    ctx.body = 'OK!'
+    await page.screenshot({ path: file, fullPage: true })
+    await send(ctx, file, { root: '/' })
+    fs.unlinkSync(file)
   } catch (e) {
     ctx.body = 'Error!'
   } finally {
