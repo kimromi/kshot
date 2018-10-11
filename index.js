@@ -22,7 +22,7 @@ router.get('/shot', async (ctx, next) => {
   const launchOptions = { headless: true }
   // for heroku
   if (process.env.DYNO) {
-    launchOptions.push({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+    launchOptions.args = ['--no-sandbox', '--disable-setuid-sandbox']
   }
   const browser = await puppeteer.launch(launchOptions)
   const page = await browser.newPage()
