@@ -1,0 +1,22 @@
+{
+  "name": "kshot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kimromi/kshot.git"
+  },
+  "author": "kimromi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kimromi/kshot/issues"
+  },
+  "homepage": "https://github.com/kimromi/kshot#readme",
+  "dependencies": {
+    "koa": "^2.5.3"
+  }
+}
