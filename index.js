@@ -1,8 +1,18 @@
 const Koa = require('koa')
-const app = new Koa()
+const Router = require('koa-router')
 
-app.use(async (ctx) => {
-  ctx.body = 'Hello World'
+const app = new Koa()
+const router = new Router()
+
+router.get('/', (ctx, next) => {
+  ctx.body = 'Hello KShot!'
 })
+router.get('/shot', (ctx, next) => {
+  ctx.body = 'Hello Shot!'
+})
+
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
 app.listen(process.env.PORT || 80)

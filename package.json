@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/kimromi/kshot#readme",
   "dependencies": {
-    "koa": "^2.5.3"
+    "koa": "^2.5.3",
+    "koa-router": "^7.4.0"
   }
 }
