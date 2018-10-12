@@ -3,6 +3,7 @@ const Koa = require('koa')
 const Router = require('koa-router')
 const send = require('koa-send')
 const puppeteer = require('puppeteer')
+const URL = require('url')
 const ipaddr = require('ipaddr.js')
 
 require('dotenv').config()
@@ -21,7 +22,7 @@ router.get('/shot', async (ctx, next) => {
 
   let url = null
   try {
-    url = new URL(ctx.request.query.url)
+    url = URL.parse(ctx.request.query.url, true)
 
     // http or https only
     if (url.protocol !== 'http:' && url.protocol !== 'https:') {
@@ -53,7 +54,7 @@ router.get('/shot', async (ctx, next) => {
   const browser = await puppeteer.launch(launchOptions)
   const page = await browser.newPage()
   try {
-    await page.goto(url, { waitUntil: 'load' })
+    await page.goto(url.href, { waitUntil: 'load' })
     await page.waitFor(3000)
     await page.screenshot({ path: file, fullPage: true })
     await send(ctx, file, { root: '/' })
