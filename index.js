@@ -13,11 +13,10 @@ const router = new Router()
 router.get('/', (ctx, next) => {
   ctx.body = 'Hello KShot!'
 })
-router.get('/shot', async (ctx, next) => {
 
+router.get('/shot', async (ctx, next) => {
   if (typeof ctx.request.query.url === 'undefined') {
-    ctx.body = 'please set parameter `url`.'
-    return
+    return ctx.throw(400, 'please set parameter `url`')
   }
 
   let url = null
@@ -38,9 +37,7 @@ router.get('/shot', async (ctx, next) => {
     }
 
   } catch (e) {
-    console.error(e)
-    ctx.body = 'Invalid URL'
-    return
+    return ctx.throw(400, 'Invalid URL')
   }
 
   const file = `/tmp/${Math.random().toString(36).slice(-10)}.png`
@@ -61,7 +58,7 @@ router.get('/shot', async (ctx, next) => {
     await send(ctx, file, { root: '/' })
     fs.unlinkSync(file)
   } catch (e) {
-    ctx.body = 'Error!'
+    return ctx.throw(400, 'take screenhot error')
   } finally {
     await browser.close()
   }
