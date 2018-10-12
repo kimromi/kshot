@@ -20,8 +20,10 @@ router.get('/shot', async (ctx, next) => {
   const file = '/tmp/shot.png'
 
   const launchOptions = { headless: true }
-  // for heroku
-  if (process.env.DYNO) {
+  if (process.env.CHROMIUM_PATH) {
+    launchOptions.executablePath = process.env.CHROMIUM_PATH 
+  }
+  if (process.env.CHROMIUM_NO_SANDBOX) {
     launchOptions.args = ['--no-sandbox', '--disable-setuid-sandbox']
   }
   const browser = await puppeteer.launch(launchOptions)
