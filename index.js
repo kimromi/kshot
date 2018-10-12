@@ -3,6 +3,7 @@ const Koa = require('koa')
 const Router = require('koa-router')
 const send = require('koa-send')
 const puppeteer = require('puppeteer')
+const ipaddr = require('ipaddr.js')
 
 require('dotenv').config()
 
@@ -13,9 +14,32 @@ router.get('/', (ctx, next) => {
   ctx.body = 'Hello KShot!'
 })
 router.get('/shot', async (ctx, next) => {
-  const url = ctx.request.query.url
-  if (typeof url === 'undefined') {
+
+  if (typeof ctx.request.query.url === 'undefined') {
     ctx.body = 'please set parameter `url`.'
+    return
+  }
+
+  let url = null
+  try {
+    url = new URL(ctx.request.query.url)
+
+    // http or https only
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+      throw 'invalid scheme'
+    }
+    // can't shot localhost
+    if (/localhost|127\.0\.0\.1/.test(url.host)) {
+      throw 'can not set localhost'
+    }
+    // can't shot private ip address
+    if (ipaddr.IPv4.isValid(url.host) && ipaddr.IPv4.parse(url.host).range() === 'private') {
+      throw 'can not set private ip address'
+    }
+
+  } catch (e) {
+    console.error(e)
+    ctx.body = 'Invalid URL'
     return
   }
 

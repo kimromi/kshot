@@ -19,6 +19,7 @@
   "homepage": "https://github.com/kimromi/kshot#readme",
   "dependencies": {
     "dotenv": "^6.1.0",
+    "ipaddr.js": "^1.8.1",
     "koa": "^2.5.3",
     "koa-router": "^7.4.0",
     "koa-send": "^5.0.0",
