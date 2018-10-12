@@ -19,7 +19,7 @@ router.get('/shot', async (ctx, next) => {
     return
   }
 
-  const file = '/tmp/shot.png'
+  const file = `/tmp/${Math.random().toString(36).slice(-10)}.png`
 
   const launchOptions = { headless: true }
   if (process.env.CHROMIUM_PATH) {
