@@ -4,6 +4,8 @@ const Router = require('koa-router')
 const send = require('koa-send')
 const puppeteer = require('puppeteer')
 
+require('dotenv').config()
+
 const app = new Koa()
 const router = new Router()
 
@@ -21,7 +23,7 @@ router.get('/shot', async (ctx, next) => {
 
   const launchOptions = { headless: true }
   if (process.env.CHROMIUM_PATH) {
-    launchOptions.executablePath = process.env.CHROMIUM_PATH 
+    launchOptions.executablePath = process.env.CHROMIUM_PATH
   }
   if (process.env.CHROMIUM_NO_SANDBOX) {
     launchOptions.args = ['--no-sandbox', '--disable-setuid-sandbox']
