@@ -37,6 +37,7 @@ router.get('/shot', async (ctx, next) => {
     }
 
   } catch (e) {
+    console.error(e)
     return ctx.throw(400, 'Invalid URL')
   }
 
@@ -58,6 +59,7 @@ router.get('/shot', async (ctx, next) => {
     await send(ctx, file, { root: '/' })
     fs.unlinkSync(file)
   } catch (e) {
+    console.error(e)
     return ctx.throw(400, 'take screenhot error')
   } finally {
     await browser.close()
