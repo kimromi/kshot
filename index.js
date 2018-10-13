@@ -12,7 +12,7 @@ const app = new Koa()
 const router = new Router()
 
 router.get('/', (ctx, next) => {
-  ctx.body = 'Hello KShot!'
+  ctx.body = "Hello KShot!\nExample: https://kshot.herokuapp.com/shot?url=http://example.com"
 })
 
 router.get('/shot', async (ctx, next) => {
