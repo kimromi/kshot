@@ -61,7 +61,7 @@ router.get('/shot', async (ctx, next) => {
     }
     await page.screenshot({ path: file, fullPage: true })
     await send(ctx, file)
-    fs.unlinkSync(file)
+    fs.unlink(file, (err) => {})
   } catch (e) {
     console.error(e)
     return ctx.throw(400, 'take screenhot error')
