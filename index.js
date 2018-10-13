@@ -42,7 +42,7 @@ router.get('/shot', async (ctx, next) => {
     return ctx.throw(400, 'Invalid URL')
   }
 
-  const file = `/tmp/${Math.random().toString(36).slice(-10)}.png`
+  const file = `tmp/${Math.random().toString(36).slice(-10)}.png`
 
   const launchOptions = { headless: true }
   if (process.env.CHROMIUM_PATH) {
@@ -60,7 +60,7 @@ router.get('/shot', async (ctx, next) => {
       await page.waitFor(wait)
     }
     await page.screenshot({ path: file, fullPage: true })
-    await send(ctx, file, { root: '/' })
+    await send(ctx, file)
     fs.unlinkSync(file)
   } catch (e) {
     console.error(e)
