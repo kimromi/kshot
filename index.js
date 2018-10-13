@@ -56,7 +56,7 @@ router.get('/shot', async (ctx, next) => {
   try {
     await page.goto(url.href, { waitUntil: 'load' })
     const wait = parseInt(ctx.request.query.wait)
-    if (0 < wait && wait <= 5000) {
+    if (!!wait && 0 < wait && wait <= 5000) {
       await page.waitFor(wait)
     }
     await page.screenshot({ path: file, fullPage: true })
