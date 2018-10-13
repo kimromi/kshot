@@ -54,7 +54,7 @@ router.get('/shot', async (ctx, next) => {
   const browser = await puppeteer.launch(launchOptions)
   const page = await browser.newPage()
   try {
-    await page.goto(url.href, { waitUntil: 'load' })
+    await page.goto(url.href, { waitUntil: 'domcontentloaded' })
     const wait = parseInt(ctx.request.query.wait)
     if (!!wait && 0 < wait && wait <= 5000) {
       await page.waitFor(wait)
