@@ -29,7 +29,7 @@ router.get('/shot', async (ctx, next) => {
       throw 'invalid scheme'
     }
     // can't shot localhost
-    if (/localhost|127\.0\.0\.1/.test(url.host)) {
+    if (/^(localhost|127\.0\.0\.1)$/.test(url.hostname)) {
       throw 'can not set localhost'
     }
     // can't shot private ip address
