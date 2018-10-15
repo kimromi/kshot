@@ -15,6 +15,6 @@ $ npm run dev
 ## Using heroku buildpacks
 
 ```
-$ heroku buildpacks:add https://github.com/jontewks/puppeteer-heroku-buildpack.git`
-$ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs`
+$ heroku buildpacks:add https://github.com/jontewks/puppeteer-heroku-buildpack.git
+$ heroku buildpacks:add https://github.com/heroku/heroku-buildpack-nodejs
 ```
